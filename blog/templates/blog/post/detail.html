@@ -3,24 +3,36 @@
 {% block content %}
 <article class="nyt-detail">
     <h1>{{ post.title }}</h1>
+
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="nyt-detail-image">
+    {% endif %}
+
     <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
-    <div class="nyt-body">{{ post.body|markdown }}</div>
+
+    <div class="nyt-body">
+        {{ post.body|markdown }}
+    </div>
 
     <section class="nyt-similar">
         <h2>Similar posts</h2>
         {% for post in similar_posts %}
-        <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
-        {% empty %}<p>No similar posts yet.</p>{% endfor %}
+            <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
+        {% empty %}
+            <p>No similar posts yet.</p>
+        {% endfor %}
     </section>
 
     <section class="nyt-comments">
         <h2>{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
         {% for comment in comments %}
-        <div class="comment">
-            <p><strong>{{ comment.name }}</strong> on {{ comment.created }}</p>
-            {{ comment.body|linebreaks }}
-        </div>
-        {% empty %}<p>No comments yet.</p>{% endfor %}
+            <div class="comment">
+                <p><strong>{{ comment.name }}</strong> on {{ comment.created }}</p>
+                {{ comment.body|linebreaks }}
+            </div>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
         {% include "blog/post/includes/comment_form.html" %}
     </section>
 </article>
