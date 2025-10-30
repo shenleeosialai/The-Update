@@ -35,6 +35,7 @@ class Post(models.Model):
 
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manager.
+    editors_pick = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-publish']

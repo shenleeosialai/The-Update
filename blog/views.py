@@ -20,7 +20,7 @@ class PostListView(ListView):
 
 
 def post_list(request, tag_slug=None):
-    posts = Post.published.all()
+    posts = Post.published.filter(editors_pick=False)
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -38,8 +38,10 @@ def post_list(request, tag_slug=None):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
+    sidebar_posts = Post.published.filter(editors_pick=True).order_by('-publish')[:5]
     return render(request, "blog/post/list.html", {'posts': posts,
-                                                   'tag': tag})
+                                                   'tag': tag,
+                                                   'sidebar_posts': sidebar_posts})
 
 
 def post_detail(request, year, month, day, post):

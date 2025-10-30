@@ -5,7 +5,14 @@
     <h1>{{ post.title }}</h1>
 
     {% if post.image %}
-        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="nyt-detail-image">
+    <div class="nyt-article-image mobile-only">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    </div>
+    {% endif %}
+    {% if post.image %}
+    <div class="nyt-article-image desktop-only">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    </div>
     {% endif %}
 
     <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
@@ -17,21 +24,21 @@
     <section class="nyt-similar">
         <h2>Similar posts</h2>
         {% for post in similar_posts %}
-            <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
+        <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
         {% empty %}
-            <p>No similar posts yet.</p>
+        <p>No similar posts yet.</p>
         {% endfor %}
     </section>
 
     <section class="nyt-comments">
         <h2>{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
         {% for comment in comments %}
-            <div class="comment">
-                <p><strong>{{ comment.name }}</strong> on {{ comment.created }}</p>
-                {{ comment.body|linebreaks }}
-            </div>
+        <div class="comment">
+            <p><strong>{{ comment.name }}</strong> on {{ comment.created }}</p>
+            {{ comment.body|linebreaks }}
+        </div>
         {% empty %}
-            <p>No comments yet.</p>
+        <p>No comments yet.</p>
         {% endfor %}
         {% include "blog/post/includes/comment_form.html" %}
     </section>

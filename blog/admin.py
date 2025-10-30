@@ -4,17 +4,17 @@ from .models import Post, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'author', 'publish', 'status')
-    list_filter = ('status', 'created', 'publish', 'author')
+    list_display = ('title', 'slug', 'author', 'publish', 'status', 'editors_pick')
+    list_filter = ('status', 'created', 'publish', 'author', 'editors_pick')
     search_fields = ('title', 'body')
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
-    date_hierarchy = 'publish'
+    date_hierarchy = ('publish')
     ordering = ('status', 'publish')
 
     # Add this line to show the image field in the form
     fields = ('title', 'slug', 'author', 'image', 'body', 'tags', 'status',
-              'publish')
+              'publish', 'editors_pick')
 
 
 @admin.register(Comment)

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}THE B-HYVE{% endblock %}</title>
+    <title>{% block title %}THE UPDATE{% endblock %}</title>
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
     {% block head %}{% endblock %}
 </head>
@@ -14,10 +14,10 @@
 <body>
 
     <header class="blog-header">
-        <h1>THE UPDATE</h1>
-        <p class="subtitle">Thinking out Loud</p>
+        <a href="{% url 'blog:post_list' %}" class="logo-link">
+            <img src="{% static 'images/bullsharktransparent.jpeg' %}" alt="Oshen Updates Logo" class="logo">
+        </a>
     </header>
-
 
     <main id="content">
         {% block content %}{% endblock %}
