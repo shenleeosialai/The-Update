@@ -31,6 +31,11 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
+    path('api/v1/', include('api.urls')),
+    path('api/v1/rest-auth/', include('dj_rest_auth.urls')),
+    path('api/v1/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('account/', include('django.contrib.auth.urls')),
+
 ]
 
 if settings.DEBUG:
