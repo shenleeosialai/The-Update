@@ -26,13 +26,14 @@ INSTALLED_APPS = [
 
     # Third-party apps
     "rest_framework",
-    "rest_framework.authtoken",
+    # "rest_framework.authtoken",
     "dj_rest_auth",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
     "taggit",
+    'rest_framework_simplejwt',
 
     # Local apps
     "blog.apps.BlogConfig",
@@ -94,14 +95,16 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        # "rest_framework.authentication.TokenAuthentication",
         # If you plan to use JWT, replace the above line with:
-        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
 
 # Use JWT with dj-rest-auth if you want stateless auth
-# REST_USE_JWT = True
+REST_USE_JWT = True
+TOKEN_MODEL = None
+
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True

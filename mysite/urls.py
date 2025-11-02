@@ -20,6 +20,10 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import PostSitemap
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 
 sitemaps = {
@@ -32,6 +36,8 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
     path('api/v1/', include('api.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/rest-auth/', include('dj_rest_auth.urls')),
     path('api/v1/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('account/', include('django.contrib.auth.urls')),
