@@ -39,7 +39,7 @@ header.blog-header .logo-link {
 }
 
 header.blog-header .logo {
-    height: 70px;
+    height:120px;
     width: auto;
     display: block;
     margin: 0 auto;
@@ -59,7 +59,7 @@ header.blog-header .logo:hover {
 
 @media (max-width: 480px) {
     header.blog-header .logo {
-        height: 45px;
+        height: 65px;
     }
 }
 
